@@ -1,0 +1,78 @@
+﻿@model WordCount.Models.Output
+
+@{
+    ViewData["Title"] = "Word Count";
+
+    // Receive data from controller via ViewBag
+    IDictionary<string, int> output = ViewBag.WordCount;
+    Output WordsAndSentences = ViewBag.WordsAndSentences;
+
+    // Create int for sentence count
+    int totalSentences = WordsAndSentences.SentenceCount;
+
+    // Sort words by quantity first, alphabetically second.
+    var results = output.OrderByDescending(i => i.Value).ThenBy(i => i.Key);
+
+    // Create int for total word count
+    int totalWords = results.Sum(i => i.Value);
+}
+
+<style>
+    h4 {
+        text-align: center;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    .TableRecords tbody tr:nth-child(odd) {
+        background: lightgrey;
+        width: 100%
+    }
+
+    .TableRecords tbody tr:nth-child(even) {
+        background: white;
+        width: 100%
+    }
+
+    h4 {
+        color: black;
+    }
+
+    body {
+        background: white;
+    }
+
+    .center {
+        text-align: center;
+        list-style-position: inside;
+    }
+</style>
+
+
+
+<h4>Total Words: @totalWords</h4>
+<br />
+<h4>Total Sentences: @totalSentences</h4>
+
+<br />
+
+<div>
+    <table class="TableRecords text-center">
+
+        <tbody text-center>
+            @foreach (KeyValuePair<string, int> kvp in results)
+            {
+                <tr>
+                    <td>
+                        <subj style="font-weight:bold">Word:</subj> @kvp.Key
+                        <br />
+                        <subj style="font-weight:bold">Count:</subj> @kvp.Value
+                        <br />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
