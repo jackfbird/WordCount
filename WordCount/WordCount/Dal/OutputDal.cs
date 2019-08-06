@@ -30,6 +30,7 @@ namespace WordCount.Dal
                     while (!sr.EndOfStream)
                     {
                         string line = sr.ReadLine();
+                        line = line.Replace("-", " ");
                         string editedLine = line.Replace("  ", " ");
 
                         if (line != "")
