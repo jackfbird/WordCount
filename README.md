@@ -12,4 +12,4 @@ Counts total words and total sentences.
 
 
 
-![Test Image 1](WordCountResults.png)
+![Test Image 1](WordCountResultsv2.png)
